@@ -14,7 +14,6 @@ unzip(download_path, exdir = download_dir)
 files = dir(download_dir)
 print(files)
 
-
 # find file
 files = dir(download_dir, "*.csv|xlsx", full.names = T)
 file_idx = which(grepl("country_data", files))

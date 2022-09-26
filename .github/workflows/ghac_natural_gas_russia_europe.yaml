@@ -1,4 +1,4 @@
-name: Test download file on gh ac
+name: Download natural gas flows
 
 # Controls when the action will run.
 on:
@@ -25,7 +25,7 @@ jobs:
 
     # Run R script
     - name: Scrape
-      run: Rscript R/test_GHAC.R
+      run: Rscript R/get_natural_gas_russia_europe.R
 
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files

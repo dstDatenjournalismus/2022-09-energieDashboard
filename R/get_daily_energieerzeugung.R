@@ -1,24 +1,22 @@
+library(httr)
+library(jsonlite)
 today = as.Date(Sys.time())
 tomorrow = today + 1
 
 # url ---------------------------------------------------------------------
 url = sprintf("https://transparency.apg.at/transparency-api/api/v1/Data/AGPT/German/M15/%sT000000/%sT000000", today, tomorrow)
 
+# download zip ------------------------------------------------------------
+download_path = tempfile()
+download_dir = dirname(download_path)
 
 # download data -----------------------------------------------------------
+# download.file(url, download_path, method="libcurl", headers = c("User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0"))
+httr::GET(url, write_disk(download_path, overwrite = T))
 
-# build request
-req = httr2::request(url)
-req = httr2::req_headers(req, "Accept" = "application/json")
-req = httr2::req_headers(req, "User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0")
-
-
-# perform the request
-resp = httr2::req_perform(req)
-
-# get the content
-content = httr2::resp_body_json(resp)
-print(paste0("content: ", content))
+content = fromJSON(download_path)
+print(content)
+stop("here is stop")
 
 # table headers -----------------------------------------------------------
 values_list = list(
