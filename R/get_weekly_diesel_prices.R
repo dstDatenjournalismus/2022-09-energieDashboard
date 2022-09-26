@@ -73,6 +73,6 @@ new_data[["country_ger"]] = res
 
 
 # save data ---------------------------------------------------------------
-fn = sprintf(here("R/output/weekly_fuel_prices/weeky_fuel_prices.csv"))
+fn = here::here("R/output/weekly_fuel_prices/weeky_fuel_prices.csv")
 dir = dirname(fn); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 write.csv(new_data, fn)
