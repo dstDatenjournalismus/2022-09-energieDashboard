@@ -5,17 +5,20 @@ tomorrow = today + 1
 
 # url ---------------------------------------------------------------------
 url = sprintf("https://transparency.apg.at/transparency-api/api/v1/Data/AGPT/German/M15/%sT000000/%sT000000", today, tomorrow)
+url = "https://transparency.apg.at/transparency-api/api/v1/Download/AGPT/German/M15/2021-01-01T000000/2022-09-26T000000/AGPT_2020-12-31T23_00_00Z_2022-09-26T22_00_00Z_60M_de_2022-09-26T15_40_08Z.csv"
 
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)
 
 # download data -----------------------------------------------------------
-# download.file(url, download_path, method="libcurl", headers = c("User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0"))
-httr::GET(url, write_disk(download_path, overwrite = T))
+download.file(url, download_path, method="libcurl", headers = c("User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0"))
+# httr::GET(url, write_disk(download_path, overwrite = T))
 
-content = fromJSON(download_path)
-print(content)
+d = read.delim(download_path, sep = ";")
+print(head(d))
+# content = fromJSON(download_path)
+# print(content)
 stop("here is stop")
 
 # table headers -----------------------------------------------------------
