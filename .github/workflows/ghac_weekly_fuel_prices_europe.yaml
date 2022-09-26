@@ -12,15 +12,8 @@ jobs:
   autoscrape:
 
     # The type of runner that the job will run on
-    runs-on: macos-latest
     # runs-on: ubuntu-latest
-    # runs-on: macos-latest
-    runs-on: ubuntu-latest
-
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: macos-latest
 
     # Load repo and install R
     steps:
@@ -35,6 +28,7 @@ jobs:
         R -e 'install.packages("httr2")'
         R -e 'install.packages("readxl")'
         R -e 'install.packages("here")'
+
     # Run R script
     - name: Scrape
       run: Rscript R/get_weekly_diesel_prices.R
