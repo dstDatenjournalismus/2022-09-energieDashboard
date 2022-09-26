@@ -14,16 +14,19 @@ jobs:
     # The type of runner that the job will run on
     runs-on: macos-latest
     # runs-on: ubuntu-latest
+    # runs-on: macos-latest
+    runs-on: ubuntu-latest
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     # Load repo and install R
     steps:
     - uses: actions/checkout@master
     - uses: r-lib/actions/setup-r@master
 
-    env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     # Set-up R
     - name: Install packages
