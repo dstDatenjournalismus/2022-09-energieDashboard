@@ -18,6 +18,11 @@ jobs:
     - uses: actions/checkout@master
     - uses: r-lib/actions/setup-r@master
 
+    # Set-up R
+    - name: Install packages
+      run: |
+        R -e 'install.packages("httr")'
+
     # Run R script
     - name: Scrape
       run: Rscript R/test_GHAC.R
