@@ -1,3 +1,5 @@
+library(httr)
+
 # url ---------------------------------------------------------------------
 url = "https://www.bruegel.org/sites/default/files/2022-09/gas_tracker_update_.zip"
 
