@@ -20,7 +20,7 @@ files = dir(download_dir, "*.csv|xlsx")
 file_idx = which(grepl("country_data", files))
 
 # read data
-data = read_csv(files[[file_idx]])
+data = read.csv(files[[file_idx]])
 
 print(head(data))
 
