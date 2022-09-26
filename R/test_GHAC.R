@@ -14,3 +14,14 @@ unzip(download_path, exdir = download_dir)
 files = dir(download_dir)
 print(files)
 
+
+# find file
+files = dir(download_dir, "*.csv|xlsx")
+file_idx = which(grepl("country_data", files))
+
+# read data
+data = read_csv(files[[file_idx]])
+
+print(head(data))
+
+
