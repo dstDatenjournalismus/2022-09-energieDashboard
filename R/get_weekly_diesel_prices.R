@@ -74,5 +74,7 @@ new_data[["country_ger"]] = res
 
 # save data ---------------------------------------------------------------
 fn = here::here("R/output/weekly_fuel_prices/weeky_fuel_prices.csv")
+print(paste0("Filename: ", fn))
 dir = dirname(fn); if(!dir.exists(dir)) dir.create(dir, recursive = T)
+print(paste0("Created: ", dir))
 write.csv(new_data, fn)
