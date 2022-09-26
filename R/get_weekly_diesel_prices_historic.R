@@ -121,7 +121,7 @@ rownames(diesel) = NULL
 diesel_wide = diesel %>% pivot_wider(names_from = country,
                                 values_from = Dieselkraftstoff)
 
-path_diesel = here("R/output/weekly_fuel_prices/historic/historic_diesel.csv")
+path_diesel = here::here("R/output/weekly_fuel_prices/historic/historic_diesel.csv")
 dir = dirname(path_diesel); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 write.csv(diesel_wide, path_diesel)
 
