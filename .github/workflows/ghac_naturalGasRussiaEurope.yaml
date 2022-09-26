@@ -1,10 +1,10 @@
-# Hourly scraping
+# Weekly download every tuesday
 name: natural gas russia europe
 
 # Controls when the action will run.
 on:
   schedule:
-    - cron:  "0 1 * * *"
+    - cron:  "0 10 * * TUE"
   workflow_dispatch:
 
 
@@ -37,7 +37,7 @@ jobs:
         git config --local user.name actions-user
         git config --local user.email "actions@github.com"
         git add output/*
-        git commit -am "natural gas data $(date)"
+        git commit -am "new natural gas data $(date)"
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}

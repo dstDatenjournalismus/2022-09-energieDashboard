@@ -1,10 +1,10 @@
-# Hourly scraping
-name: download fuel prices
+# Every Tuesday
+name: download weekly fuel prices for Europe
 
 # Controls when the action will run.
 on:
   schedule:
-    - cron:  "0 1 * * *"
+    - cron:  "0 10 * * TUE"
   workflow_dispatch:
 
 
@@ -12,7 +12,8 @@ jobs:
   autoscrape:
 
     # The type of runner that the job will run on
-    runs-on: macos-latest
+    # runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     # Load repo and install R
     steps:
@@ -35,7 +36,7 @@ jobs:
         git config --local user.name actions-user
         git config --local user.email "actions@github.com"
         git add output/*
-        git commit -am "data $(date)"
+        git commit -am "new weekly diesel data for europe $(date)"
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
