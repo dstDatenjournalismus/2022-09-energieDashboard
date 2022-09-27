@@ -28,7 +28,7 @@ jobs:
 
     # Run R script
     - name: Scrape
-      run: Rscript R/get_weekly_diesel_prices_historic.R
+      run: Rscript R/get_weekly_diesel_prices_historic_withTaxes.R
 
     # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
