@@ -117,6 +117,9 @@ one_df_all_countries %>%
     country,
     diesel
   ) %>%
+  mutate(
+    diesel = as.numeric(diesel) / 1000
+  ) %>%
   pivot_wider(
     names_from = country,
     values_from = diesel
