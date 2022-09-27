@@ -1,5 +1,4 @@
-# Historic diesel prices
-name: download historic diesel prices
+name: Download natural gas flows
 
 # Controls when the action will run.
 on:
@@ -22,21 +21,19 @@ jobs:
     # Set-up R
     - name: Install packages
       run: |
-        R -e 'install.packages("readxl")'
-        R -e 'install.packages("tidyverse")'
-        R -e 'install.packages("here")'
+        R -e 'install.packages("httr")'
 
     # Run R script
     - name: Scrape
-      run: Rscript R/get_weekly_diesel_prices_historic_withTaxes.R
+      run: Rscript R/get_natural_gas_russia_europe.R
 
-    # Add new files in data folder, commit along with other modified files, push
+ # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
       run: |
         git config --local user.name actions-user
         git config --local user.email "actions@github.com"
         git add -A
-        git commit -am "new historic diesel data $(date)"
+        git commit -am "new natural gas data $(date)"
         git push origin main
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
