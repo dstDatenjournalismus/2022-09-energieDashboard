@@ -27,11 +27,16 @@ export default async function donwloadStromErzeugung() {
   const MONTH = makeMonth(TODAY);
   const YEAR = makeYear(TODAY);
   const DATE_FORMATTED = `${YEAR}-${MONTH}-${DAY}`;
-  const START_DATE = "2021-01-01";
+  const START_DATE = "2022-08-02";
   const START_DATE_M_ONE = "2020-12-31";
 
   let filename =
-    outDir + "/" + DATE_FORMATTED.toString().replace(/-/g, "_") + ".csv";
+    outDir +
+    "/" +
+    START_DATE.toString().replace(/-/g, "_") +
+    "_" +
+    DATE_FORMATTED.toString().replace(/-/g, "_") +
+    ".csv";
 
   // if file already exists do not request it
   if (fs.existsSync(filename)) {
@@ -98,8 +103,6 @@ export default async function donwloadStromErzeugung() {
     }, {});
 
   res.forEach((d, i) => {
-    if (i === res.length - 1) {
-    }
     let date = d.date[0];
     let types = Object.keys(d);
     types.forEach((t, j) => {
@@ -117,6 +120,17 @@ export default async function donwloadStromErzeugung() {
   });
 
   let final = Object.keys(dates).map((k) => dates[k]);
+
+  // format the dates in the data
+  final.forEach((d) => {
+    let vals = Object.values(d);
+    let keys = Object.keys(d);
+    keys.slice(0, 2).forEach((k) => {
+      d[k] = d[k].split(" ")[0];
+    });
+    vals = Object.values(d);
+  });
+
   let r0 = Object.keys(final[0]).map((k) => {
     return {
       id: k,
@@ -129,7 +143,10 @@ export default async function donwloadStromErzeugung() {
     header: r0,
   });
 
-  csvWriter.writeRecords(final).then(() => console.log("data written"));
+  csvWriter
+    .writeRecords(final)
+    .then(() => console.log("Data written"))
+    .catch((e) => console.log(`Error: `, e));
 }
 
 donwloadStromErzeugung();
