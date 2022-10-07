@@ -6,7 +6,7 @@ data = readxl::read_xlsx(file, sheet = 2)
 
 # get the date (in col 5 header) ------------------------------------------------------------
 col5_header = names(data)[[5]]
-date_unformatted = gsub(".*(\\d{1,2}/\\d{1,2}/\\d{1,2})$", "\\1", col5_header)
+date_unformatted = gsub(".*\\s(\\d{1,2}\\/\\d{1,2}/\\d{1,2})$", "\\1", col5_header)
 date = as.Date(date_unformatted, format="%m/%d/%y")
 
 # format data --------------------------------------------------------------
