@@ -4,13 +4,15 @@ library(httr)
 # url = "https://www.bruegel.org/sites/default/files/2022-09/gas_tracker_update_.zip"
 url = "https://www.bruegel.org/sites/default/files/2022-10/gas%20datasets_0.zip"
 
-print("here")
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)
 
 # download.file(url, download_path, method="libcurl", headers = c("User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0"))
-httr::GET(url, write_disk(download_path, overwrite = T))
+res = httr::GET(url, write_disk(download_path, overwrite = T))
+
+if(!res$status_code == 200) stop("Download did not work")
+
 unzip(download_path, exdir = download_dir)
 
 
