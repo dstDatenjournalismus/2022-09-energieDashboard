@@ -16,11 +16,11 @@ unzip(download_path, exdir = download_dir)
 
 # data dir ----------------------------------------------------------------
 unzipped_dir_name = paste0(download_dir, "/gas datasets")
-
 files = dir(unzipped_dir_name)
 
 # find file
-files = dir(download_dir, "*.csv|xlsx", full.names = T)
+files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
+print("files: ", files)
 file_idx = which(grepl("country_data", files))
 
 # read data
