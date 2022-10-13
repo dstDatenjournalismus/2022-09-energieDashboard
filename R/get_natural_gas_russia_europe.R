@@ -9,9 +9,29 @@ download_path = tempfile()
 download_dir = dirname(download_path)
 
 # download.file(url, download_path, method="libcurl", headers = c("User-Agent" = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0"))
-res = httr::GET(url, write_disk(download_path, overwrite = T))
 
-if(!res$status_code == 200) stop("Download did not work")
+
+# Download the data in loop -----------------------------------------------
+success = FALSE
+i = 1
+while(!success & i <= 5) {
+
+  print(paste0("Try for the ", i, ". time"))
+
+  # try the download
+  res = httr::GET(url, write_disk(download_path, overwrite = T))
+
+  # if it did work
+  if (res$status_code == 200) {
+    success = TRUE
+  }
+
+  # if it did not work
+  i = i + 1
+
+}
+
+if(!res$status_code == 200) stop("Download did not work after 5 tries")
 
 unzip(download_path, exdir = download_dir)
 
