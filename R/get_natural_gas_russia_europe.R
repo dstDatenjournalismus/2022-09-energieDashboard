@@ -28,11 +28,12 @@ data = read.csv(files[[file_idx]])
 # wrangle it a bit
 col_indices = which(grepl("week|Russia_", names(data)))
 data = data[, col_indices]
-data = data[complete.cases(data), ]
+# data = data[complete.cases(data), ]
 
 data[["EU Ziel"]] = (1/3) * data$Russia_2021
 
 print(head(data))
+print(tail(data))
 
 names(data)[names(data) == "Russia_avg"] = "Durchschnitt 2015 - 2022"
 names(data)[names(data) == "Russia_2022"] = "2022"
