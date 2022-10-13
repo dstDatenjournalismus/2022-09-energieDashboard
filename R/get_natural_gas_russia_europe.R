@@ -12,7 +12,7 @@ download_dir = dirname(download_path)
 httr::GET(url, write_disk(download_path, overwrite = T))
 unzip(download_path, exdir = download_dir)
 files = dir(download_dir)
-print(files)
+print("files: ", files)
 
 # find file
 files = dir(download_dir, "*.csv|xlsx", full.names = T)
