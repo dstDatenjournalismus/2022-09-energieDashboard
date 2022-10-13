@@ -70,6 +70,11 @@ res = sapply(new_data$country, function(x) {
 
 new_data[["country_ger"]] = res
 
+new_data %>%
+  mutate(
+    across(where(is.numeric),
+           ~ .x / 1000)
+  ) -> new_data
 
 
 # save data ---------------------------------------------------------------
