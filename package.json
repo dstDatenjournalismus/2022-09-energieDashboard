@@ -4,7 +4,7 @@
   "description": "",
   "main": "downloadStromErzeugung.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "scrape" : "node ./downloadStromErzeugung.js"
   },
   "keywords": [],
   "author": "",
