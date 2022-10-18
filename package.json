@@ -1,30 +1,20 @@
 {
-  "name": "energiedashboardData",
+  "name": "js",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "man": "man"
-  },
+  "main": "downloadStromErzeugung.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RobinKohrs/energiedashboardData.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "module",
-  "bugs": {
-    "url": "https://github.com/RobinKohrs/energiedashboardData/issues"
-  },
-  "homepage": "https://github.com/RobinKohrs/energiedashboardData#readme",
   "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
     "csv-writer": "^1.6.0",
     "d3": "^7.6.1",
-    "lodash": "^4.17.21",
-    "node-fetch": "^3.2.10"
-  }
+    "lodash": "^4.17.21"
+  },
+  "type": "module"
 }

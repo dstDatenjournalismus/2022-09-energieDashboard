@@ -63,3 +63,11 @@ names(data)[names(data) == "Russia_2022"] = "2022"
 output_file = "R/output/natural_gas_russia_europe.csv"
 dir = dirname(output_file); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 write.csv(data, output_file)
+
+
+# gas flow per pipeline ---------------------------------------------------
+
+
+
+
+

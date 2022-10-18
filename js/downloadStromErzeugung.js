@@ -3,7 +3,6 @@ import * as d3 from "d3";
 import _ from "lodash";
 import node_fetch from "node-fetch";
 import { createObjectCsvWriter } from "csv-writer";
-import { symbolSquare } from "d3";
 
 global.fetch = node_fetch;
 
@@ -27,8 +26,8 @@ export default async function donwloadStromErzeugung() {
   const MONTH = makeMonth(TODAY);
   const YEAR = makeYear(TODAY);
   const DATE_FORMATTED = `${YEAR}-${MONTH}-${DAY}`;
-  const START_DATE = "2022-08-02";
-  const START_DATE_M_ONE = "2020-12-31";
+  const START_DATE = "2022-09-30";
+  const START_DATE_M_ONE = "2022-09-29";
 
   let filename =
     outDir +
@@ -47,23 +46,21 @@ export default async function donwloadStromErzeugung() {
   // url for
   // const url = `https://transparency.apg.at/transparency-api/api/v1/Download/AGPT/German/M15/2021-01-01T000000/${DATE_FORMATTED}T000000/AGPT_2020-12-31T22_00_00Z_${DATE_FORMATTED}T22_00_00Z_60M_de_${DATE_FORMATTED}T15_40_08Z.csv`;
   const url = `https://transparency.apg.at/transparency-api/api/v1/Download/AGPT/German/M15/${START_DATE}T000000/${DATE_FORMATTED}T000000/AGPT_${START_DATE_M_ONE}T23_00_00Z_${DATE_FORMATTED}T22_00_00Z_60M_de_${DATE_FORMATTED}T15_40_08Z.csv`;
-  console.log(`url`, url);
-  // https://transparency.apg.at/transparency-api/api/v1/Download/AGPT/German/M60/2021-01-01T000000/2022-09-20T000000/0dfa0bab-bffe-467e-aa21-211dad325f7b/AGPT_2020-12-31T23_00_00Z_2022-09-19T22_00_00Z_60M_de_2022-09-19T12_37_02Z.csv?
 
   // Fetch data
   let data;
-  try {
-    data = await d3.dsv(";", url);
-    // add date to each row
-    data = data.map((e) => {
+  data = await d3.dsv(";", url, d3.autoType);
+
+  data = data.map((e) => {
+    try {
       return {
         ...e,
-        date: e["Zeit von [CET/CEST]"].slice(0, 10),
+        date: e[Object.keys(e)[0]].slice(0, 10),
       };
-    });
-  } catch (e) {
-    console.log(`error `, e);
-  }
+    } catch (error) {
+      console.log("some error: ", error);
+    }
+  });
 
   let groupedByDate = _.groupBy(data, (d) => d.date);
 
@@ -71,7 +68,7 @@ export default async function donwloadStromErzeugung() {
   let keys = Object.keys(groupedByDate);
 
   let res = keys.map((d) => {
-    // d is a single date...
+    // => d is a single date...
 
     // valsOneDay is an array of Objects of 15 Minute intervals on that day
     let valsOneDay = groupedByDate[d];
@@ -123,7 +120,7 @@ export default async function donwloadStromErzeugung() {
 
   // format the dates in the data
   final.forEach((d) => {
-    let vals = Object.values(d);
+    // let vals = Object.values(d);
     let keys = Object.keys(d);
     keys.slice(0, 2).forEach((k) => {
       d[k] = d[k].split(" ")[0];
