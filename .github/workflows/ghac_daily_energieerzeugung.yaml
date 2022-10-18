@@ -26,7 +26,7 @@ jobs:
 
     # Run R script
     - name: Scrape
-      run: Rscript R/get_daily_energieerzeugung.R
+      run: Rscript R/archive/get_daily_energieerzeugung.R
 
  # Add new files in data folder, commit along with other modified files, push
     - name: Commit files
