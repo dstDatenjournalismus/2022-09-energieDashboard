@@ -26,8 +26,8 @@ export default async function donwloadStromErzeugung() {
   const MONTH = makeMonth(TODAY);
   const YEAR = makeYear(TODAY);
   const DATE_FORMATTED = `${YEAR}-${MONTH}-${DAY}`;
-  const START_DATE = "2022-09-30";
-  const START_DATE_M_ONE = "2022-09-29";
+  const START_DATE = "2022-01-01";
+  const START_DATE_M_ONE = "2020-12-31";
 
   let filename =
     outDir +
@@ -120,7 +120,7 @@ export default async function donwloadStromErzeugung() {
 
   // format the dates in the data
   final.forEach((d) => {
-    // let vals = Object.values(d);
+    let vals = Object.values(d);
     let keys = Object.keys(d);
     keys.slice(0, 2).forEach((k) => {
       d[k] = d[k].split(" ")[0];
