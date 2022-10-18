@@ -4,7 +4,7 @@
   "description": "",
   "main": "downloadStromErzeugung.js",
   "scripts": {
-    "scrape" : "node ./downloadStromErzeugung.js"
+    "scrape": "node ./js/downloadStromErzeugung.js"
   },
   "keywords": [],
   "author": "",
