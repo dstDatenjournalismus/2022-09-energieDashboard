@@ -1,8 +1,8 @@
 on:
   schedule:
-    - cron: "0 * * * *" # Every hour. Ref https://crontab.guru/examples.html
+    - cron: "* 9 * * *" # Jeden Tag um 9
   workflow_dispatch:
-name: Scrape Strom Erzeugung Data
+name: Daily Stromerzeugungsdata
 jobs:
   build:
     name: Build

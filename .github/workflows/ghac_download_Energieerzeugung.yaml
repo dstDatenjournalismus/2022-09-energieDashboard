@@ -1,9 +1,9 @@
-name: Test downloa
+name: Test download from apg with wget
 
 # Controls when the action will run.
 on:
   schedule:
-    - cron:  "0 10 * * TUE"
+    - cron:  "0 * 10 * *"
   workflow_dispatch:
 
 
