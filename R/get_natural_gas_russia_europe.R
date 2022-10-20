@@ -26,6 +26,7 @@ while(!success & i <= 5) {
 
   # try the download
   res = httr::GET(url, write_disk(download_path, overwrite = T))
+  print(paste0("res: ", res$status_code))
 
   # if it did work
   if (res$status_code == 200) {
