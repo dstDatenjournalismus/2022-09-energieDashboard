@@ -1,9 +1,10 @@
 name: Download natural gas flows
 
 # Controls when the action will run.
+# Seems to update every wednesday, so run (just to be sure) every wednesday at 1am
 on:
   schedule:
-    - cron:  "0 10 * * TUE"
+    - cron:  "0 1 * * Wed"
   workflow_dispatch:
 
 

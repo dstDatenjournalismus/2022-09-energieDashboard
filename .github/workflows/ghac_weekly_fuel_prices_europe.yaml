@@ -1,10 +1,10 @@
-# Every Tuesday
 name: download weekly fuel prices for Europe
 
 # Controls when the action will run.
+# Every Wednesday at 10 (or when desired manually)
 on:
   schedule:
-    - cron:  "0 10 * * TUE"
+    - cron:  "0 10 * * WED"
   workflow_dispatch:
 
 
