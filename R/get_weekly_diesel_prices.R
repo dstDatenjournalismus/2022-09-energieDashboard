@@ -1,4 +1,8 @@
+# url ---------------------------------------------------------------------
 url = "https://ec.europa.eu/energy/observatory/reports/latest_prices_with_taxes.xlsx"
+
+
+# download file -----------------------------------------------------------
 file = paste0(tempdir(), "/", "temp.xlsx")
 download.file(url, file)
 data = readxl::read_xlsx(file, sheet = 2)

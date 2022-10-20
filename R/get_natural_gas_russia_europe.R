@@ -1,8 +1,14 @@
 library(httr)
 
-# url ---------------------------------------------------------------------
+# urls ---------------------------------------------------------------------
+
 # url = "https://www.bruegel.org/sites/default/files/2022-09/gas_tracker_update_.zip"
-url = "https://www.bruegel.org/sites/default/files/2022-10/gas%20datasets_0.zip"
+
+# 10.10
+# url = "https://www.bruegel.org/sites/default/files/2022-10/gas%20datasets_0.zip"
+
+# 20.10
+url = "https://www.bruegel.org/sites/default/files/2022-10/Gas%20tracker_0.zip"
 
 # download zip ------------------------------------------------------------
 download_path = tempfile()
@@ -37,7 +43,10 @@ unzip(download_path, exdir = download_dir)
 
 
 # data dir ----------------------------------------------------------------
-unzipped_dir_name = paste0(download_dir, "/gas datasets")
+
+# the unzipped file does not contain the files, but another directory which apparently
+# changes each week its name. But every week so far the word "Gas" was in it
+unzipped_dir_name = dir(download_dir, ".*[gG]as.*", full.names = T)
 
 # find file
 files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
@@ -63,9 +72,6 @@ names(data)[names(data) == "Russia_2022"] = "2022"
 output_file = "R/output/natural_gas_russia_europe.csv"
 dir = dirname(output_file); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 write.csv(data, output_file)
-
-
-# gas flow per pipeline ---------------------------------------------------
 
 
 
