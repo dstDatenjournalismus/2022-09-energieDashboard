@@ -58,13 +58,23 @@ data_current_year %>%
   mutate(monat = lubridate::month(month, label = T)) -> data_avg
 
 
+# make it wide for dw -----------------------------------------------------
+data_avg %>%
+  pivot_wider(
+    names_from = current_year,
+    values_from = mean_verbrauch
+  ) %>%
+  rename("5_j_avg" =   `FALSE` ,
+         "current_year" =   `TRUE`) -> data_wide
+
+
 
 # write out the data ------------------------------------------------------
 fn = here::here("R/output/gasverbrauch/monatlicher_gasverbrauch_5jahresmittel.csv")
 print(paste0("Filename: ", fn))
 dir = dirname(fn); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 print(paste0("Created: ", dir))
-write.csv(data_av, fn)
+write.csv(data_wide, fn)
 
 
 
