@@ -83,7 +83,10 @@ new_data %>%
 # use commas instead of points --------------------------------------------
 data_per_l %>%
   mutate(across(where(is.double),
-                ~ gsub("\\.", ",", .x))) -> data_final
+                ~ gsub("\\.", ",", .x))) %>%
+  mutate(
+    diesel_tooltip = diesel
+  ) -> data_finals
 
 
 
