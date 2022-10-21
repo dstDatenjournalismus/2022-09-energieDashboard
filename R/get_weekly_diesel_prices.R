@@ -61,11 +61,11 @@ res = sapply(new_data$country, function(x) {
     "Lithuania" = "Litauen",
     "Luxembourg" = "Luxemburg",
     "Malta" = "Malta",
-    "Netherlands" = "Niederlanden",
+    "Netherlands" = "Niederlande",
     "Poland" = "Polen",
     "Portugal" = "Portugal",
     "Romania" = "Rumänien",
-    "Slovakia" = "Slovakei",
+    "Slovakia" = "Slowakei",
     "Slovenia" = "Slowenien",
     "Spain" = "Spanien",
     "Sweden" = "Schweden",
@@ -76,7 +76,15 @@ new_data[["country_ger"]] = res
 
 new_data %>%
   mutate(across(where(is.numeric),
-                ~ round(.x / 1000, 2))) -> new_data
+                ~ round(.x / 1000, 2))) -> data_per_l
+
+
+
+# use commas instead of points --------------------------------------------
+data_per_l %>%
+  mutate(across(where(is.double),
+                ~ gsub("\\.", ",", .x))) -> data_final
+
 
 
 # save data ---------------------------------------------------------------
@@ -84,4 +92,4 @@ fn = here::here("R/output/weekly_fuel_prices/weeky_fuel_prices.csv")
 print(paste0("Filename: ", fn))
 dir = dirname(fn); if(!dir.exists(dir)) dir.create(dir, recursive = T)
 print(paste0("Created: ", dir))
-write.csv(new_data, fn)
+write.csv(data_final, fn)
