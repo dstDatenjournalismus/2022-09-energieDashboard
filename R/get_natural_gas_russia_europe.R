@@ -10,6 +10,9 @@ library(httr)
 # 20.10
 url = "https://www.bruegel.org/sites/default/files/2022-10/Gas%20tracker_0.zip"
 
+# 3.11
+url = "https://www.bruegel.org/sites/default/files/2022-11/Naturalgasimports-021122.zip"
+
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)

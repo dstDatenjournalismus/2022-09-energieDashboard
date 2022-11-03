@@ -86,7 +86,7 @@ data_per_l %>%
                 ~ gsub("\\.", ",", .x))) %>%
   mutate(
     diesel_tooltip = diesel
-  ) -> data_finals
+  ) -> data_final
 
 
 
