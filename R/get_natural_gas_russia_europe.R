@@ -8,10 +8,16 @@ library(httr)
 # url = "https://www.bruegel.org/sites/default/files/2022-10/gas%20datasets_0.zip"
 
 # 20.10
-url = "https://www.bruegel.org/sites/default/files/2022-10/Gas%20tracker_0.zip"
+# url = "https://www.bruegel.org/sites/default/files/2022-10/Gas%20tracker_0.zip"
 
 # 3.11
-url = "https://www.bruegel.org/sites/default/files/2022-11/Naturalgasimports-021122.zip"
+# url = "https://www.bruegel.org/sites/default/files/2022-11/Naturalgasimports-021122.zip"
+
+# 14.11
+# url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker.zip"
+
+# 18.11
+url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2015%20Nov.zip"
 
 # download zip ------------------------------------------------------------
 download_path = tempfile()
