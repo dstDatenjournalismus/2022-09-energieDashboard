@@ -1,3 +1,5 @@
+library(dplyr)
+
 # url ---------------------------------------------------------------------
 url = "https://ec.europa.eu/energy/observatory/reports/latest_prices_with_taxes.xlsx"
 
