@@ -28,6 +28,7 @@ jobs:
         R -e 'install.packages("httr2")'
         R -e 'install.packages("readxl")'
         R -e 'install.packages("here")'
+        R -e 'install.packages("dplyr")'
 
     # Run R script
     - name: Scrape
