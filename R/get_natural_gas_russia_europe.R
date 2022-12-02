@@ -20,7 +20,10 @@ library(httr)
 # url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2015%20Nov.zip"
 
 # 28.11
-url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2022.11.22.zip"
+# url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2022.11.22.zip"
+
+# 2.12
+url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2029.11.22.zip"
 
 # download zip ------------------------------------------------------------
 download_path = tempfile()
