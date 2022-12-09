@@ -25,6 +25,9 @@ library(httr)
 # 2.12
 url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2029.11.22.zip"
 
+# 9.12
+url = "https://www.bruegel.org/sites/default/files/2022-12/Gas%20tracker%2007.12.22.zip"
+
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)
@@ -84,6 +87,19 @@ print(tail(data))
 
 names(data)[names(data) == "Russia_avg"] = "Durchschnitt 2015 - 2022"
 names(data)[names(data) == "Russia_2022"] = "2022"
+
+
+
+# remove comma ------------------------------------------------------------
+data %>%
+  mutate(
+    across(where(is.character),
+            ~as.numeric(gsub(",", "", .x))
+           )
+  ) -> data
+
+
+
 
 output_file = "R/output/natural_gas_russia_europe.csv"
 dir = dirname(output_file); if(!dir.exists(dir)) dir.create(dir, recursive = T)
