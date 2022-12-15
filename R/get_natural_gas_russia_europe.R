@@ -1,4 +1,6 @@
 library(httr)
+library(rvest)
+library(dplyr)
 
 # urls ---------------------------------------------------------------------
 
@@ -23,10 +25,28 @@ library(httr)
 # url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2022.11.22.zip"
 
 # 2.12
-url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2029.11.22.zip"
+# url = "https://www.bruegel.org/sites/default/files/2022-11/Gas%20tracker%2029.11.22.zip"
 
 # 9.12
-url = "https://www.bruegel.org/sites/default/files/2022-12/Gas%20tracker%2007.12.22.zip"
+# url = "https://www.bruegel.org/sites/default/files/2022-12/Gas%20tracker%2007.12.22.zip"
+
+# 15.12
+url = "https://www.bruegel.org/sites/default/files/2022-12/Gas%20tracker%2013.12.22.zip"
+
+#######
+# 15.12 Automate it
+#######
+
+# read the html
+html = rvest::read_html("https://www.bruegel.org/dataset/european-natural-gas-imports")
+
+# find the link
+path = html_attr(html_elements(html, 'a[title="Download data"]'), "href")
+url = paste0("https://www.bruegel.org/", path)
+
+
+
+
 
 # download zip ------------------------------------------------------------
 download_path = tempfile()
@@ -75,6 +95,14 @@ file_idx = which(grepl("country_data", files))
 # read data
 data = read.csv(files[[file_idx]])
 
+data %>%
+  mutate(
+    across(where(is.character),
+            ~as.numeric(gsub(",", "", .x))
+           )
+  ) -> data
+
+
 # wrangle it a bit
 col_indices = which(grepl("week|Russia_", names(data)))
 data = data[, col_indices]
@@ -87,18 +115,6 @@ print(tail(data))
 
 names(data)[names(data) == "Russia_avg"] = "Durchschnitt 2015 - 2022"
 names(data)[names(data) == "Russia_2022"] = "2022"
-
-
-
-# remove comma ------------------------------------------------------------
-data %>%
-  mutate(
-    across(where(is.character),
-            ~as.numeric(gsub(",", "", .x))
-           )
-  ) -> data
-
-
 
 
 output_file = "R/output/natural_gas_russia_europe.csv"
