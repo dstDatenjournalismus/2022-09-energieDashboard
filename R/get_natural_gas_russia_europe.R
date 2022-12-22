@@ -47,7 +47,6 @@ url = paste0("https://www.bruegel.org/", path)
 
 
 
-
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)
@@ -92,8 +91,19 @@ files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
 print(paste0("files: ", files))
 file_idx = which(grepl("country_data", files))
 
+
+# find the file -----------------------------------------------------------
+file = files[[file_idx]]
+
+fileEnding = strsplit(basename(file), "\\.") %>% .[[1]] %>% .[[2]]
+
+
 # read data
-data = read.csv(files[[file_idx]])
+if(fileEnding == "csv") {
+  data = read.csv(files[[file_idx]])
+} else{
+  data = readxl::read_xlsx(file)
+}
 
 data %>%
   mutate(
