@@ -84,10 +84,11 @@ unzip(download_path, exdir = download_dir)
 
 # the unzipped file does not contain the files, but another directory which apparently
 # changes each week its name. But every week so far the word "Gas" was in it
-unzipped_dir_name = dir(download_dir, ".*[gG]as.*", full.names = T)
+# unzipped_dir_name = dir(download_dir, ".*[gG]as.*", full.names = T)
 
 # find file
-files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
+# files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
+files = dir(download_dir, ".*\\.csv|xlsx$", full.names = T)
 print(paste0("files: ", files))
 file_idx = which(grepl("country_data", files))
 
