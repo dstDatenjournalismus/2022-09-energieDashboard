@@ -4,7 +4,7 @@ name: Download natural gas flows
 # Seems to update every wednesday, so run (just to be sure) every wednesday at 1am
 on:
   schedule:
-    - cron:  "0 1 * * Wed"
+    - cron:  "0 1 * * Thu"
   workflow_dispatch:
 
 
