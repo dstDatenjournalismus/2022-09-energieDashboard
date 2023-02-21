@@ -88,7 +88,7 @@ unzip(download_path, exdir = download_dir)
 
 # find file
 # files = dir(unzipped_dir_name, "*.csv|xlsx", full.names = T)
-files = dir(download_dir, ".*\\.csv|xlsx$", full.names = T)
+files = dir(download_dir, ".*\\.csv|xlsx$", full.names = T, recursive = T)
 print(paste0("files: ", files))
 file_idx = which(grepl("country_data", files))
 
