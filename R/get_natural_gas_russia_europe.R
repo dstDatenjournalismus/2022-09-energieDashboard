@@ -1,6 +1,7 @@
 library(httr)
 library(rvest)
 library(dplyr)
+library(readxl)
 
 # urls ---------------------------------------------------------------------
 
