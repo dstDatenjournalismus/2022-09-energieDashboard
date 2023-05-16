@@ -46,8 +46,6 @@ path = html_attr(html_elements(html, 'a[title="Download data"]'), "href")
 url = paste0("https://www.bruegel.org/", path)
 
 
-
-
 # download zip ------------------------------------------------------------
 download_path = tempfile()
 download_dir = dirname(download_path)
